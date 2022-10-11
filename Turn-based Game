@@ -1,0 +1,67 @@
+import random
+
+hp1 = 100
+hp2 = 100
+
+moves = ["Q", "H", "R"]
+
+while hp1 >= 0 and hp2 >= 0:
+  print("Player 1 has", hp1, "hp")
+  print("Player 2 has", hp2, "hp")
+  m = input("Player 1: Choose your move: (Q)uick attack, (H)eavy attack, (R)eplenish\n>")
+  if m == "Q" or m == "q":
+    a = random.randrange(18, 25)
+    hp2 = hp2 - a
+    print ("Player 2 just got hit for", a, "damage")
+  
+  elif m == "H" or m == "h":
+    b = random.randrange(10, 35)
+    hp2 = hp2 - b
+    print ("Player 2 just got hit for", b, "damage")
+  
+  elif m == "R" or m == "r":
+    c = random.randrange(18, 25)
+    hp1 = hp1 + c
+    print ("Player 1 just healed themself by", c)
+  
+  else:
+    m = input("Player 1: Choose your move: (Q)uick attack, (H)eavy attack, (R)eplenish\n>")
+
+  if hp1 >0 and hp2 >0:
+    print("Player 1 has", hp1, "hp")
+    print("Player 2 has", hp2, "hp\n")
+
+  if hp2 < 35:
+    moves = ["Q", "H", "R", "R"]
+  
+  if hp1<=0 or hp2<=0:
+    break
+  
+  m = random.choice(moves)
+  if m == "Q" or m == "q":
+    a = random.randrange(18, 25)
+    hp1 = hp1 - a
+    print ("Player 1 just got hit for", a, "damage")
+  
+  elif m == "H" or m == "h":
+    b = random.randrange(10, 35)
+    hp1 = hp1 - b
+    print ("Player 1 just got hit for", b, "damage")
+  
+  elif m == "R" or m == "r":
+    c = random.randrange(18, 25)
+    hp2 = hp2 + c
+    print ("Player 2 just healed themself by", c)
+
+  else:
+    m = input("Player 1: Choose your move: (Q)uick attack, (H)eavy attack, (R)eplenish\n>")
+  
+if hp1<=0:
+  print("Player 1 has", 0, "hp")
+  print("Player 2 has", hp2, "hp")
+  print("player 2 wins!")
+
+elif hp2<=0:
+  print("Player 1 has", hp1, "hp")
+  print("Player 2 has", 0, "hp")
+  print("player 1 wins!")
