@@ -1,0 +1,67 @@
+import random
+import time
+gamescore = 100
+print("The aim of the game is to have as high a score as possible. You'll start with", gamescore, "points. There are 5 rounds. The difference between your total for each round and 21 will be subtracted from your overall score. If you bust then 21 is subtracted from your score.\n Let's play")
+cards = {
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+  9: 9,
+  10: 10,
+  'Jack': 10,
+  'Queen': 10,
+  'King': 10,
+  'Ace': 1
+}
+
+score = 0
+
+time.sleep(5)
+
+for round_no in range(5):
+
+  print("\nROUND", round_no + 1, "COMMENCE")
+  
+  deal = (random.choice(list(cards.items())),
+          random.choice(list(cards.items())))
+
+  print("Your starting hand is: ", deal[0][0], ",", deal[1][0])
+
+  score = (deal[0][1] + deal[1][1])
+
+  print("Your total is:", score)
+
+  move = "t"
+  twist = []
+
+  x = 0
+
+  while score < 21:
+
+    move = input("(s)tick or (t)wist?\n>")
+    if move == "s":
+      gamescore = gamescore - (21-score)
+      
+      break
+    twist.append(random.choice(list(cards.items())))
+
+    print("Your next card is:", twist[x][0])
+
+    score = (deal[0][1] + deal[1][1])
+    for i in twist:
+      score = score + int(i[1])
+
+    print("Your total is: ", score)
+    x = x + 1
+
+    if score > 21:
+      print("You've lost 21 points from your score")
+      gamescore = gamescore - 21
+  print("Your total is:", gamescore)
+  
+
+  
