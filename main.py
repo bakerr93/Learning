@@ -1,35 +1,24 @@
-import random
-
-def Get_ToF_statements():
-  statements = []
-  statements.append(["The tallest mountain is Everest", "true", "True"])
-  statements.append(["The largest forest is the Amazon", "true", "True"])
-  statements.append(["USA is the most populous country", "false", "False"])
-  statements.append(["Brown eyes are a dominant gene", "true", "True"])
-  statements.append(["Cheese is made of trees", "false", "False"])
-
-  return statements
+originalBalance = 999999
+annualInterest = 0.18
+monthlyInterest = annualInterest/12
+monthlyPaymentLower = round(originalBalance/12,2)
+monthlyPaymentUpper = round((originalBalance*(1+monthlyInterest)**12)/12,2)
+balance = originalBalance
 
 
-print("type 'stop' to end the game")
-
-def Ask_questions():
-  stop = False
-  ToF_statements = Get_ToF_statements()
-  random.shuffle(ToF_statements)
-  score = 0
-  while stop is False:
-    for s in ToF_statements:
-      print(s[0] + ": True or false?")
-      user_answer = input(">")
-      if user_answer == s[1] or user_answer == s[2]:
-        print("Congrats!")
-        score = score + 1
-      elif user_answer == "stop":
-        stop = True
-        score = str(score)
-        print("your score is " + score)
-      else:
-        print("better luck next time")
-
-Ask_questions()
+while balance > 0.1 or balance < -0.1:
+  balance = originalBalance
+  for months in range(12):
+    balance = balance - monthlyPaymentLower
+    balance = balance*(1 + monthlyInterest)
+  monthlyPaymentLower = monthlyPaymentLower + 0.01
+  #print(round(balance, 1))
+  monthlyPayment = monthlyPaymentLower - 0.01
+  balance = originalBalance
+  for months in range(12):
+    balance = balance - monthlyPaymentUpper
+    balance = balance*(1 + monthlyInterest)
+  monthlyPaymentUpper = monthlyPaymentUpper - 0.01
+  #print(round(balance, 1))
+  monthlyPayment = monthlyPaymentUpper + 0.01
+print(round(monthlyPayment,2))
